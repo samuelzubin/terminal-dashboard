@@ -2,9 +2,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class TaskList implements Iterable<Task> {
-	static ArrayList<Task> list = new ArrayList<>();
+	ArrayList<Task> list = new ArrayList<>();
 	
-	static void addTask(Task t) {
+	void addTask(Task t) {
 		if (list.contains(t)) {
 			System.out.println("Task \"" + t.description + "\" already exists");
 			return;
@@ -13,7 +13,7 @@ public class TaskList implements Iterable<Task> {
 		list.add(t);
 	}
 
-	static void removeTask(Task t) {
+	void removeTask(Task t) {
 		if (!list.contains(t)) { 
 			System.out.println("Task does not exist"); 
 			return;
@@ -22,12 +22,16 @@ public class TaskList implements Iterable<Task> {
 		list.remove(t);
 	}
 
-	static void markCompleted(Task t) {
+	void markCompleted(Task t) {
 		if (!list.contains(t)) { 
 			System.out.println("Task does not exist"); 
 			return;
 		}
 		t.completed = true;
+	}
+
+	void clear() {
+		list.clear();
 	}
 
 	@Override

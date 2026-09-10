@@ -6,12 +6,10 @@ public class Task {
 
 	Task(String desc) {
 		description = desc; completed = false;
-		TaskList.addTask(this);
 	}
 
 	Task(String desc, boolean comp) {
 		description = desc; completed = comp;
-		TaskList.addTask(this);
 	}
 
 	String display() {
