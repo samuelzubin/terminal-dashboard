@@ -3,7 +3,7 @@ public class Dashboard {
 
 	static void print(TaskList taskList) {
 		System.out.println("┌───────────────────────────────────────────────────────────────────────┐");
-    System.out.println("|                                 Tasks                                 |");
+    System.out.println("|                                 Today                                 |");
     System.out.println("├───────────────────────────────────────────────────────────────────────┤");
     System.out.println("|                                                                       |");
 
