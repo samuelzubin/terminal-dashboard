@@ -10,7 +10,7 @@ public class InputParser {
 	void HandleInput(String input, TaskList taskList) {
 		if (input.startsWith("+")) {
 			String parsed = input.substring(1).trim();
-			Task newTask = new Task(parsed);
+			Task  newTask = new Task(parsed);
 
 			taskList.addTask(newTask, filePath);
 		}

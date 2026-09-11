@@ -7,7 +7,6 @@ public class Dashboard {
     System.out.println("|                                  Today                                |");
     System.out.println("├───────────────────────────────────────────────────────────────────────┤");
 
-    // Display weather info padded to fit your 71-char inner width
     System.out.printf("| %-69s |\n", weatherInfo);
 
     System.out.println("├───────────────────────────────────────────────────────────────────────┤");

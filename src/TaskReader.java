@@ -4,45 +4,45 @@ import java.io.IOException;
 import java.util.List;
 
 public class TaskReader {
-    
-    private Path filePath;
 
-		TaskReader(String path) {
-			filePath = Path.of(path);
-		}
+  private Path filePath;
 
-    void getTasks(TaskList taskList) {
-			taskList.clear();
-			try {
-					List<String> lines = Files.readAllLines(filePath);
-					boolean inToday = false;
+  TaskReader(String path) {
+    filePath = Path.of(path);
+  }
 
-					for (String line : lines) {
-							String trimmed = line.trim();
+  void getTasks(TaskList taskList) {
+    taskList.clear();
+    try {
+      List<String> lines = Files.readAllLines(filePath);
+      boolean inToday = false;
 
-							if (trimmed.equalsIgnoreCase("## today")) {
-								inToday = true;
-								continue;
-							}
+      for (String line : lines) {
+        String trimmed = line.trim();
 
-							if (inToday && trimmed.startsWith("## ")) {
-								break;
-							}
-							
-							if (inToday) {
-								if (trimmed.startsWith("- [ ]")) {
-										String taskContent = trimmed.substring(5).trim();
-										taskList.list.add(new Task(taskContent, false));
-								} 
-								else if (trimmed.startsWith("- [x]") || trimmed.startsWith("- [X]")) {
-										String taskContent = trimmed.substring(5).trim();
-										taskList.list.add(new Task(taskContent, true));
-								}
-						}
-					}
-			} 
-			catch (IOException e) {
-					System.out.println("Error: " + e.getMessage());
-			}
+        if (trimmed.equalsIgnoreCase("## today")) {
+          inToday = true;
+          continue;
+        }
+
+        if (inToday && trimmed.startsWith("## ")) {
+          break;
+        }
+
+        if (inToday) {
+          if (trimmed.startsWith("- [ ]")) {
+            String taskContent = trimmed.substring(5).trim();
+            taskList.list.add(new Task(taskContent, false));
+          } 
+          else if (trimmed.startsWith("- [x]") || trimmed.startsWith("- [X]")) {
+            String taskContent = trimmed.substring(5).trim();
+            taskList.list.add(new Task(taskContent, true));
+          }
+        }
+      }
+    } 
+    catch (IOException e) {
+      System.out.println("Error: " + e.getMessage());
     }
+  }
 }

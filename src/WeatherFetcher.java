@@ -11,16 +11,15 @@ import java.util.regex.Pattern;
 public class WeatherFetcher {
 
   public static String getWeather() {
-    String apiKey = "89822fc30267dac3178511b476c96676";
-    String city = "Oak Park,CA,US";
+    String apiKey = System.getProperty("OPENWEATHER_API_KEY");
+    String city = System.getProperty("WEATHER_CITY");
+    if (apiKey == null || apiKey.isEmpty()) {
+      return "API Key Missing";
+    }
 
     try {
       String encodedCity = URLEncoder.encode(city, StandardCharsets.UTF_8);
-
-      String urlString = String.format(
-        "https://api.openweathermap.org/data/2.5/weather?q=%s&appid=%s&units=imperial",
-        encodedCity, apiKey
-      );
+      String urlString = String.format("https://api.openweathermap.org/data/2.5/weather?q=%s&appid=%s&units=imperial", encodedCity, apiKey);
 
       HttpClient client = HttpClient.newBuilder()
       .connectTimeout(Duration.ofSeconds(10))
@@ -38,7 +37,6 @@ public class WeatherFetcher {
 
       if (response.statusCode() == 200) {
         String json = response.body();
-
         String cityName = getValue(json, "\"name\":\"([^\"]+)\"");
         String tempStr = getValue(json, "\"temp\":([0-9.-]+)");
         int temp = (int) Math.round(Double.parseDouble(tempStr));
@@ -46,7 +44,8 @@ public class WeatherFetcher {
 
         return String.format("%s • %d°F • %s", cityName, temp, description);
       }
-    } catch (Exception e) {
+    }
+    catch (Exception e) {
     }
     return "Weather unavailable";
   }

@@ -60,7 +60,8 @@ public class TaskList implements Iterable<Task> {
         if (inToday) {
           if (trimmed.startsWith("## ")) {
             inToday = false;
-          } else {
+          }
+          else {
             continue;
           }
         }

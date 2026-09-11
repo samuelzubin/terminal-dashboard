@@ -5,11 +5,13 @@ public class Task {
 	boolean completed;
 
 	Task(String desc) {
-		description = desc; completed = false;
+		description = desc;
+    completed = false;
 	}
 
 	Task(String desc, boolean comp) {
-		description = desc; completed = comp;
+		description = desc; 
+    completed = comp;
 	}
 
 	String display() {
@@ -20,13 +22,8 @@ public class Task {
 	@Override
   public boolean equals(Object obj) {
     if (this == obj) return true;
-    if (obj == null || getClass() != obj.getClass()) return false;
+    if (obj  == null || getClass() != obj.getClass()) return false;
     Task task = (Task) obj;
     return Objects.equals(description, task.description);
-  }
-
-	@Override
-  public int hashCode() {
-    return Objects.hash(description);
   }
 }
